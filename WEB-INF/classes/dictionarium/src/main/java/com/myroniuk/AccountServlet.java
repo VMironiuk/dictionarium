@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class NewAccountServlet extends HttpServlet {
+public class AccountServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws
             ServletException, IOException {
@@ -21,7 +21,6 @@ public class NewAccountServlet extends HttpServlet {
             + "<body>\n"
             + "<br>User name: " + req.getParameter("username") + "\n"
             + "<br>Password: " + req.getParameter("password") + "\n"
-            + "<br>Confirm password: " + req.getParameter("confirmpassword") + "\n"
             + "</body>\n"
             + "</html>");
     }

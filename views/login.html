@@ -14,9 +14,11 @@
     </div>
     
     <div class="form">
-      <input type="text" placeholder="Username" />
-      <input type="password" placeholder="Password" />
-      <button>Log in</button>
+      <form action="/dictionarium/account" method="POST">
+        <input type="text" placeholder="Username" name="username" />
+        <input type="password" placeholder="Password" name="password" />
+        <button>Log in</button>
+      </form>
     </div>
   </body>
 </html>
