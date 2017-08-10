@@ -27,7 +27,7 @@ public abstract class BaseServlet extends HttpServlet {
         printWriter.println(getHtmlContent(realPath));
     }
 
-    static protected String getHtmlContent(String filePath) throws IOException {
+    static private String getHtmlContent(String filePath) throws IOException {
         FileReader fileReader = new FileReader(filePath);
         BufferedReader buffReader = new BufferedReader(fileReader);
         
