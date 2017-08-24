@@ -9,22 +9,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/login"})
+@WebServlet(urlPatterns = {"/doLogin"})
 
-public class LoginServlet extends HttpServlet {
+public class DoLoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-	public LoginServlet() {
+	public DoLoginServlet() {
 		super();
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
-		RequestDispatcher dispatcher = request.getServletContext()
-				.getRequestDispatcher("/WEB-INF/views/login.jsp");
-		dispatcher.forward(request, response);
+		String userName = request.getParameter("userName");
+		String password = request.getParameter("password");
+		String rememberMeStr = request.getParameter("rememberMe");
+		
+		System.out.println(userName);
+		System.out.println(password);
+		System.out.println(rememberMeStr);
 	}
 	
 	@Override
