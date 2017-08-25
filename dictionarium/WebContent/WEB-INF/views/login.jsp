@@ -6,7 +6,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Dictionarium</title>
+    <title>Login</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/style.css" />" />
   </head>
   
@@ -18,8 +18,17 @@
     <div class="login-wrap">
       <div class="login-html">
         
-        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
-        <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+        <c:choose>
+          <c:when test="${not empty registerContext}">
+            <input id="tab-1" type="radio" name="tab" class="sign-in"><label for="tab-1" class="tab">Sign In</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up" checked><label for="tab-2" class="tab">Sign Up</label>
+          </c:when>
+          
+          <c:otherwise>
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+          </c:otherwise>
+        </c:choose>
         
         <div class="login-form">
           <form method="POST" action="doLogin">
