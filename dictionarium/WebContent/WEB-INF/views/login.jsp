@@ -35,7 +35,7 @@
             <div class="sign-in-htm">
               <div class="group">
                 <label for="user" class="label">Username</label>
-                <input type="text" id="user" name="userName" value="${user.userName}" class="input" />
+                <input type="text" id="user" name="userName" value="${user.name}" class="input" />
               </div>
               
               <div class="group">
@@ -63,7 +63,7 @@
             <div class="sign-up-htm">
               <div class="group">
                 <label for="user" class="label">Username</label>
-                <input type="text" name="userName" value="${user.userName}" class="input" />
+                <input type="text" name="userName" value="${user.name}" class="input" />
               </div>
                 
               <div class="group">

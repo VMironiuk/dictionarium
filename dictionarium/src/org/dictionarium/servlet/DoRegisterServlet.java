@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.dictionarium.bean.User;
 import org.dictionarium.util.ConnectionAgent;
-import org.dictionarium.util.DatabaseAgent;
+import org.dictionarium.util.UserAgent;
 
 @WebServlet(urlPatterns = {"/doRegister"})
 
@@ -37,7 +37,7 @@ public class DoRegisterServlet extends HttpServlet {
 		String errorString = null;
 		if (hasEmptyLine(userName, password, email)) {
 			hasError = true;
-			errorString = "All lines must be filled for correct sign up";
+			errorString = "Required user name, password and email";
 		} else if (!isUsernameCorrect(userName)) {
 			hasError = true;
 			errorString = "Invalid user name (template: user_name123)";
@@ -55,7 +55,7 @@ public class DoRegisterServlet extends HttpServlet {
 			Connection connection = ConnectionAgent.getStoredConnection(request);
 
 			try {
-				DatabaseAgent.insertUser(connection, user);
+				UserAgent.insertUser(connection, user);
 			} catch (SQLException e) {
 				e.printStackTrace();
 				errorString = e.getMessage();
