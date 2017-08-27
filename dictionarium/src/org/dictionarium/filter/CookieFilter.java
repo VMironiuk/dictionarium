@@ -12,6 +12,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 import org.dictionarium.bean.User;
 import org.dictionarium.util.ConnectionAgent;
@@ -45,6 +46,9 @@ public class CookieFilter implements Filter {
 			chain.doFilter(request, response);
 			return;
 		}
+		
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		CookieAgent.deleteUserCookie(httpResponse);
 		
 		String userNameInCookie = CookieAgent.getUserName(httpRequest);
 		if (userNameInCookie != null) {

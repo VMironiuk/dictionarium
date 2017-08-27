@@ -2,11 +2,8 @@ package org.dictionarium.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.Collections;
-import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,44 +16,42 @@ import org.dictionarium.util.ConnectionAgent;
 import org.dictionarium.util.DictionaryAgent;
 import org.dictionarium.util.SessionAgent;
 
-@WebServlet(urlPatterns = {"/dictionary"})
+@WebServlet(urlPatterns = {"/doAddWord"})
 
-public class DictionaryServlet extends HttpServlet {
+public class DoAddWordServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-	public DictionaryServlet() {
+	public DoAddWordServlet() {
 		super();
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
-		HttpSession session = request.getSession();
-		User user = SessionAgent.getLoginedUser(session);
+		String word = request.getParameter("word");
+		String transcription = request.getParameter("transcription");
+		String translation = request.getParameter("translation");
+		DictionaryRow row = new DictionaryRow(word, transcription, translation);
 		
-		String dictionaryName = user.getDictionaryName();
 		Connection connection = ConnectionAgent.getStoredConnection(request);
-		List<DictionaryRow> dictionary = null;
+		
+		HttpSession session = request.getSession();
+		User loginedUser = SessionAgent.getLoginedUser(session);
+		String dictionaryName = loginedUser.getDictionaryName();
+		
 		try {
-			dictionary = DictionaryAgent.queryDictionary(connection,
+			DictionaryAgent.insertDictionaryRow(connection, row,
 					dictionaryName);
-			Collections.reverse(dictionary);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-		request.setAttribute("user", user);
-		request.setAttribute("dictionary", dictionary);
-		
-		RequestDispatcher dispatcher = request.getServletContext()
-				.getRequestDispatcher("/WEB-INF/views/dictionary.jsp");
-		dispatcher.forward(request, response);
+		}	
+		response.sendRedirect(request.getContextPath() + "/dictionary");
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws IOException, ServletException {
 		this.doGet(request, response);
 	}
 }

@@ -56,6 +56,7 @@ public class DoRegisterServlet extends HttpServlet {
 
 			try {
 				UserAgent.insertUser(connection, user);
+				UserAgent.createDictionary(connection, user);
 			} catch (SQLException e) {
 				e.printStackTrace();
 				errorString = e.getMessage();

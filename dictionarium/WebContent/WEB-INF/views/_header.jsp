@@ -7,7 +7,7 @@
   </div>
   
   <div style="float: right; padding: 10px; text-align: right;">
-    <!-- User store in session with attribute loginedUser -->
-    Hello <b>${loginedUser.userName}</b>
+    <!-- User store in session with attribute user -->
+    Hello <b>${user.name}</b>
   </div>
 </div>
