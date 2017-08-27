@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.dictionarium.util.ConnectionAgent;
 import org.dictionarium.util.UserAgent;
 import org.dictionarium.util.SessionAgent;
+import org.dictionarium.util.CookieAgent;
 import org.dictionarium.bean.User;
 
 @WebServlet(urlPatterns = {"/doLogin"})
@@ -33,6 +34,7 @@ public class DoLoginServlet extends HttpServlet {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		String rememberMeStr = request.getParameter("rememberMe");
+		boolean needRemember = rememberMeStr != null;
 
 		boolean hasError = false;
 		String errorString = null;
@@ -70,8 +72,12 @@ public class DoLoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			SessionAgent.storeLoginedUser(session, user);
 
-			// TODO: if remember, store user in cookie
-			// TODO: redirect to /directory
+			if (needRemember) {
+				CookieAgent.storeUserName(response, user);
+			} else {
+				CookieAgent.deleteUserCookie(response);
+			}
+
 			response.sendRedirect(request.getContextPath() + "/dictionary");
 		}
 	}
