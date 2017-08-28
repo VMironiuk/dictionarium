@@ -7,9 +7,7 @@ import java.util.Collection;
 import java.sql.Connection;
 
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -21,17 +19,10 @@ import org.dictionarium.util.ConnectionAgent;
 
 @WebFilter(filterName = "databaseConnectivityFilter", urlPatterns = {"/*"})
 
-public class DatabaseConnectivityFilter implements Filter {
+public class DatabaseConnectivityFilter extends BaseFilter {
 
 	public DatabaseConnectivityFilter() {
-	}
-	
-	@Override
-	public void init(FilterConfig config) throws ServletException {
-	}
-	
-	@Override
-	public void destroy() {
+		super();
 	}
 	
 	@Override

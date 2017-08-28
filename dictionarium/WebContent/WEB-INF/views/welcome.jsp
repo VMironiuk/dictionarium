@@ -9,7 +9,7 @@
   
   <body>
     <div style="text-align: center">
-      <h2>Welcome to Dictionarium!</h2>
+      <h2>Welcome to Dictionarium, ${user.name}!</h2>
       <h5>You can <a href="${pageContext.request.contextPath}/login">login</a> freely now.</h5>
     </div>
   </body>

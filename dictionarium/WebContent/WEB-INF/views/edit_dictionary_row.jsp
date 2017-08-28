@@ -12,7 +12,7 @@
   <body>
     <jsp:include page="_header.jsp" />
     
-    <br>
+    <p style="color: red">${errorString}</p>
     
     <c:if test="${not empty dictionaryRow}">
       <form method="POST" action="doEditDictionaryRow">

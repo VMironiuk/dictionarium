@@ -11,40 +11,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.dictionarium.bean.DictionaryRow;
 import org.dictionarium.bean.User;
 import org.dictionarium.util.ConnectionAgent;
 import org.dictionarium.util.DictionaryAgent;
 import org.dictionarium.util.SessionAgent;
 
-@WebServlet(urlPatterns = {"/doAddWord"})
+@WebServlet(urlPatterns = {"/doDeleteDictionaryRow"})
 
-public class DoAddWordServlet extends HttpServlet {
+public class DoDeleteDictionaryRow extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-	public DoAddWordServlet() {
+	public DoDeleteDictionaryRow() {
 		super();
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
-		String word = request.getParameter("word");
-		String transcription = request.getParameter("transcription");
-		String translation = request.getParameter("translation");
-		DictionaryRow row = new DictionaryRow(word, transcription, translation);
+		String wordIdStr = request.getParameter("wordId");
+		int wordId = 0;
+		try {
+			wordId = Integer.parseInt(wordIdStr);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		Connection connection = ConnectionAgent.getStoredConnection(request);
 		
 		HttpSession session = request.getSession();
-		User loginedUser = SessionAgent.getLoginedUser(session);
-		String dictionaryName = loginedUser.getDictionaryName();
-		
+		User user = SessionAgent.getLoginedUser(session);
+		String dictionaryName = user.getDictionaryName();
 		String errorString = null;
 		try {
-			DictionaryAgent.insertDictionaryRow(connection, row,
-					dictionaryName);
+			DictionaryAgent.deleteDictionaryRow(connection, dictionaryName,
+					wordId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			errorString = e.getMessage();
@@ -52,16 +53,16 @@ public class DoAddWordServlet extends HttpServlet {
 		
 		if (errorString != null) {
 			request.setAttribute("errorString", errorString);
-			request.setAttribute("dictionaryRow", row);
 			
 			RequestDispatcher dispatcher = request.getServletContext()
-					.getRequestDispatcher("/WEB-INF/views/add_word.jsp");
+					.getRequestDispatcher("/dictionary");
 			dispatcher.forward(request, response);
 		} else {
-			response.sendRedirect(request.getContextPath() + "/dictionary");
+			response.sendRedirect(request.getContextPath() + "/dictionary");			
 		}
+		
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {

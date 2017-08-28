@@ -12,7 +12,7 @@
   <body>
     <jsp:include page="_header.jsp" />
 
-    <br>
+    <p style="color: red">${errorString}</p>
     
     <a href="addWord">Add Word</a>
     
@@ -34,7 +34,7 @@
             <a href="editDictionaryRow?wordId=${row.wordId}">Edit</a>
           </td>
           <td>
-            <a href="deleteDictionaryRow?wordId=${row.wordId}">Delete</a>
+            <a href="doDeleteDictionaryRow?wordId=${row.wordId}">Delete</a>
           </td>
         </tr>
       </c:forEach>

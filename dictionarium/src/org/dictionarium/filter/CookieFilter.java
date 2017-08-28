@@ -3,16 +3,13 @@ package org.dictionarium.filter;
 import java.io.IOException;
 import java.sql.Connection;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpServletResponse;
 
 import org.dictionarium.bean.User;
 import org.dictionarium.util.ConnectionAgent;
@@ -22,17 +19,10 @@ import org.dictionarium.util.UserAgent;
 
 @WebFilter(filterName = "cookieFilter", urlPatterns = {"/*"})
 
-public class CookieFilter implements Filter {
+public class CookieFilter extends BaseFilter {
 
 	public CookieFilter() {
-	}
-	
-	@Override
-	public void init(FilterConfig config) throws ServletException {
-	}
-	
-	@Override
-	public void destroy() {
+		super();
 	}
 	
 	@Override
@@ -47,9 +37,6 @@ public class CookieFilter implements Filter {
 			return;
 		}
 		
-		HttpServletResponse httpResponse = (HttpServletResponse) response;
-		CookieAgent.deleteUserCookie(httpResponse);
-		
 		String userNameInCookie = CookieAgent.getUserName(httpRequest);
 		if (userNameInCookie != null) {
 			Connection connection = ConnectionAgent
@@ -57,6 +44,8 @@ public class CookieFilter implements Filter {
 			try {
 				userInSession = UserAgent
 						.findUser(connection, userNameInCookie);
+				// rest of the filters will check if there is a user in
+				// session, if not, they will be redirect to the login page
 				SessionAgent.storeLoginedUser(session, userInSession);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -64,5 +53,4 @@ public class CookieFilter implements Filter {
 		}
 		chain.doFilter(request, response);
 	}
-
 }

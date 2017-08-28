@@ -42,6 +42,10 @@ public class DoRegisterServlet extends HttpServlet {
 		} else if (!isUsernameCorrect(userName)) {
 			hasError = true;
 			errorString = "Invalid user name (template: user_name123)";
+		} else if (!isPasswordCorrect(password)) {
+			hasError = true;
+			errorString = "Password must contain at least 8 chars, digits,"
+					+ " upper and lower case letters and no whitespace allowed";
 		} else if (!isPasswordsMatches(password, repeatPassword)) {
 			hasError = true;
 			errorString = "Passwords are mismatched during sign up";
@@ -67,6 +71,9 @@ public class DoRegisterServlet extends HttpServlet {
 		}
 		
 		if (hasError) {
+			User user = new User(userName, null, email, null);
+			
+			request.setAttribute("user", user);
 			request.setAttribute("registerContext", "yes");
 			request.setAttribute("errorString", errorString);
 			RequestDispatcher dispatcher = request.getServletContext()
@@ -92,6 +99,11 @@ public class DoRegisterServlet extends HttpServlet {
 	private static boolean isUsernameCorrect(String userName) {
 		String pattern = "^[A-Za-z_][A-Za-z0-9_]{3,28}$";
 		return userName.matches(pattern);
+	}
+	
+	private static boolean isPasswordCorrect(String password) {
+		String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$";
+		return password.matches(pattern);
 	}
 	
 	private static boolean isPasswordsMatches(String password,

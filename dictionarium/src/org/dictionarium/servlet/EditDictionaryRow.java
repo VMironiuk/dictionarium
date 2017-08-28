@@ -34,22 +34,37 @@ public class EditDictionaryRow extends HttpServlet {
 		User user = SessionAgent.getLoginedUser(session);
 		
 		String wordIdStr = request.getParameter("wordId");
-		int wordId = Integer.parseInt(wordIdStr);
+		int wordId = 0;
+		try {
+			wordId = Integer.parseInt(wordIdStr);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		String dictionaryName = user.getDictionaryName();
 		Connection connection = ConnectionAgent.getStoredConnection(request);
 		DictionaryRow row = null;
+		String errorString = null;
 		try {
 			row = DictionaryAgent.findDictionaryRow(connection, wordId,
 					dictionaryName);
 		} catch (Exception e) {
 			e.printStackTrace();
+			errorString = e.getMessage();
 		}
 		
 		request.setAttribute("user", user);
 		request.setAttribute("dictionaryRow", row);
+		request.setAttribute("errorString", errorString);
+
+		String target = null;
+		if (errorString != null && row == null) {
+			target = "/WEB-INF/views/dictionary.jsp";
+		} else {
+			target = "/WEB-INF/views/edit_dictionary_row.jsp"; 
+		}
 		
 		RequestDispatcher dispatcher = request.getServletContext()
-				.getRequestDispatcher("/WEB-INF/views/edit_dictionary_row.jsp");
+				.getRequestDispatcher(target);
 		dispatcher.forward(request, response);
 	}
 	

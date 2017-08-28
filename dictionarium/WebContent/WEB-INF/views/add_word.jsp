@@ -8,21 +8,25 @@
   </head>
   
   <body>
+    <jsp:include page="_header.jsp" />
+    
+    <p style="color: red">${errorString}</p>
+  
     <form method="POST" action="doAddWord">
       <table border="0">
         <tr>
           <td>Word</td>
-          <td><input type="text" name="word" /></td>
+          <td><input type="text" name="word" value="${dictionaryRow.word}" /></td>
         </tr>
         
         <tr>
           <td>Transcription</td>
-          <td><input type="text" name="transcription" /></td>
+          <td><input type="text" name="transcription" value="${dictionaryRow.transcription}" /></td>
         </tr>
         
         <tr>
           <td>Translation</td>
-          <td><input type="text" name="translation" /></td>
+          <td><input type="text" name="translation" value="${dictionaryRow.translation}" /></td>
         </tr>
         
         <tr>

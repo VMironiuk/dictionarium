@@ -67,6 +67,14 @@ public class DictionaryAgent {
 		statement.executeUpdate();
 	}
 	
+	public static void deleteDictionaryRow(Connection connection,
+			String dictionaryName, int wordId) throws SQLException {
+		String sql = "DELETE FROM " + dictionaryName + " WHERE word_id = ?";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setInt(1, wordId);
+		statement.executeUpdate();
+	}
+	
 	public static List<DictionaryRow> queryDictionary(Connection connection,
 			String dictionaryName) throws SQLException {
 		String sql = "SELECT d.word_id, d.word, d.transcription, d.translation "

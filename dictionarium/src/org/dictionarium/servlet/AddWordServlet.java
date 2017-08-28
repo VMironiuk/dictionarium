@@ -8,6 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.dictionarium.bean.User;
+import org.dictionarium.util.SessionAgent;
 
 @WebServlet(urlPatterns = {"/addWord"})
 
@@ -22,6 +26,11 @@ public class AddWordServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
+		HttpSession session = request.getSession();
+		User user = SessionAgent.getLoginedUser(session);
+		
+		request.setAttribute("user", user);
+		
 		RequestDispatcher dispatcher = request.getServletContext()
 				.getRequestDispatcher("/WEB-INF/views/add_word.jsp");
 		dispatcher.forward(request, response);
