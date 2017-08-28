@@ -1,8 +1,8 @@
 package org.dictionarium.filter;
 
-import javax.servlet.annotation.WebFilter;
+//import javax.servlet.annotation.WebFilter;
 
-@WebFilter(filterName = "welcomeFilter", urlPatterns = {"/welcome/*"})
+//@WebFilter(filterName = "welcomeFilter", urlPatterns = {"/welcome/*"})
 
 public class WelcomeFilter extends BaseFilter {
 

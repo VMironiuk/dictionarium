@@ -7,38 +7,50 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Dictionary</title>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/css/style.css" />" />
+    <link type="text/css" rel="stylesheet" href="<c:url value="/css/dictionary_style.css" />" />
   </head>
   
   <body>
-    <jsp:include page="_header.jsp" />
-
-    <p style="color: red">${errorString}</p>
-    
-    <a href="addWord">Add Word</a>
-    
-    <table border="1" cellpadding="5" cellspacing="1">
-      <tr>
-        <th>Word</th>
-        <th>Transcription</th>
-        <th>Translation</th>
-        <th>Edit</th>
-        <th>Delete</th>
-      </tr>
+    <div id="container">
+      <jsp:include page="_header.jsp" />
+      <jsp:include page="_menu.jsp" />
       
-      <c:forEach var="row" items="${dictionary}">
-        <tr>
-          <td>${row.word}</td>
-          <td>${row.transcription}</td>
-          <td>${row.translation}</td>
-          <td>
-            <a href="editDictionaryRow?wordId=${row.wordId}">Edit</a>
-          </td>
-          <td>
-            <a href="doDeleteDictionaryRow?wordId=${row.wordId}">Delete</a>
-          </td>
-        </tr>
-      </c:forEach>
+      <p style="color: red">${errorString}</p>
       
-    </table>
+      <div class="fieldset">
+        <form action="addWord">
+          <input type="submit" class="button" value="Add New Word" />
+        </form>
+      
+        <table border="0" cellpadding="5" cellspacing="1">
+          <tr>
+            <th>Word</th>
+            <th>Transcription</th>
+            <th>Translation</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+      
+          <c:forEach var="row" items="${dictionary}">
+            <tr>
+              <td>${row.word}</td>
+              <td>${row.transcription}</td>
+              <td>${row.translation}</td>
+              <td>
+                <a href="editDictionaryRow?wordId=${row.wordId}">
+                  <img src="<c:url value="/image/edit.png" />"  alt="Edit" >
+                </a>
+              </td>
+              <td>
+                <a href="doDeleteDictionaryRow?wordId=${row.wordId}">
+                  <img src="<c:url value="/image/delete.png" />"  alt="Delete" >
+                </a>
+              </td>
+            </tr>
+          </c:forEach>
+        </table>
+      </div>
+    </div>
   </body>
 </html>

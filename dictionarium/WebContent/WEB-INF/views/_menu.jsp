@@ -4,6 +4,8 @@
 
 <link type="text/css" rel="stylesheet" href="<c:url value="/css/style.css" />" />
 
-<div class="header">
-  <h1>Dictionarium</h1>
-</div>
+<ul id="main_menu">
+  <li>${user.name}</li>
+  <li>|</li>
+  <li>Sign out</li>
+</ul>

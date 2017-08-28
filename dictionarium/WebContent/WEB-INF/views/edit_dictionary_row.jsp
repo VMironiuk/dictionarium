@@ -7,41 +7,46 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Edit Word</title>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/css/style.css" />" />
   </head>
   
   <body>
-    <jsp:include page="_header.jsp" />
-    
-    <p style="color: red">${errorString}</p>
-    
-    <c:if test="${not empty dictionaryRow}">
-      <form method="POST" action="doEditDictionaryRow">
-        <input type="hidden" name="wordId" value="${dictionaryRow.wordId}" />
-        
-        <table border="0">
-          <tr>
-            <td>Word</td>
-            <td><input type="text" name="word" value="${dictionaryRow.word}" /></td>
-          </tr>
+    <div id="container">
+      <jsp:include page="_header.jsp" />
+      <jsp:include page="_menu.jsp" />
+      
+      <p style="color: red">${errorString}</p>
+      
+      <c:if test="${not empty dictionaryRow}">
+        <form method="POST" action="doEditDictionaryRow">
+          <div class="fieldset">
+            <input type="hidden" name="wordId" value="${dictionaryRow.wordId}" />
+            <table border="0" width="100%">
+              <tr>
+                <td style="text-align: right">Word</td>
+                <td><input type="text" name="word" value="${dictionaryRow.word}" /></td>
+              </tr>
           
-          <tr>
-            <td>Transcription</td>
-            <td><input type="text" name="transcription" value="${dictionaryRow.transcription}" /></td>
-          </tr>
+              <tr>
+                <td style="text-align: right">Transcription</td>
+                <td><input type="text" name="transcription" value="${dictionaryRow.transcription}" /></td>
+              </tr>
 
-          <tr>
-            <td>Translation</td>
-            <td><input type="text" name="translation" value="${dictionaryRow.translation}" /></td>
-          </tr>
+              <tr>
+                <td style="text-align: right">Translation</td>
+                <td><input type="text" name="translation" value="${dictionaryRow.translation}" /></td>
+              </tr>
           
-          <tr>
-            <td colspan="2">
-              <input type="submit" value="Submit" />
-              <a href="${pageContext.request.contextPath}/dictionary">Cancel</a>
-            </td>
-          </tr>
-        </table>
-      </form>
-    </c:if>
+              <tr>
+                <td colspan="2" style="text-align: center">
+                  <input type="submit" class="button" value="Submit" />
+                  <a href="${pageContext.request.contextPath}/dictionary">Cancel</a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </form>
+      </c:if>
+    </div>
   </body>
 </html>

@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Login</title>
-    <link type="text/css" rel="stylesheet" href="<c:url value="/style.css" />" />
+    <link type="text/css" rel="stylesheet" href="<c:url value="/css/login_style.css" />" />
   </head>
   
   <body>
