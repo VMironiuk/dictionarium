@@ -31,10 +31,10 @@
           <td>${row.transcription}</td>
           <td>${row.translation}</td>
           <td>
-            <a href="editDictionaryRow?word=${row.word}">Edit</a>
+            <a href="editDictionaryRow?wordId=${row.wordId}">Edit</a>
           </td>
           <td>
-            <a href="deleteDictionaryRow?word=${row.word}">Delete</a>
+            <a href="deleteDictionaryRow?wordId=${row.wordId}">Delete</a>
           </td>
         </tr>
       </c:forEach>

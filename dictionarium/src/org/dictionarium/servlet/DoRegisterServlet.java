@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.dictionarium.bean.User;
 import org.dictionarium.util.ConnectionAgent;
+import org.dictionarium.util.DictionaryAgent;
 import org.dictionarium.util.UserAgent;
 
 @WebServlet(urlPatterns = {"/doRegister"})
@@ -56,7 +57,8 @@ public class DoRegisterServlet extends HttpServlet {
 
 			try {
 				UserAgent.insertUser(connection, user);
-				UserAgent.createDictionary(connection, user);
+				DictionaryAgent.createDictionary(connection,
+						user.getDictionaryName());
 			} catch (SQLException e) {
 				e.printStackTrace();
 				errorString = e.getMessage();

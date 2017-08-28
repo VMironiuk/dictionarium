@@ -2,6 +2,7 @@ package org.dictionarium.bean;
 
 public class DictionaryRow {
 
+	private int wordId;
 	private String word;
 	private String transcription;
 	private String translation;
@@ -14,6 +15,18 @@ public class DictionaryRow {
 		this.word = word;
 		this.transcription = transcription;
 		this.translation = translation;
+	}
+	
+	public DictionaryRow(int wordId, String word, String transcription,
+			String translation) {
+		this.wordId = wordId;
+		this.word = word;
+		this.transcription = transcription;
+		this.translation = translation;
+	}
+	
+	public int getWordId() {
+		return this.wordId;
 	}
 	
 	public String getWord() {

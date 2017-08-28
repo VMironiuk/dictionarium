@@ -65,16 +65,4 @@ public class UserAgent {
 		}
 		return null;
 	}
-	
-	public static void createDictionary(Connection connection, User user)
-			throws SQLException {
-		String sql = "CREATE TABLE " + user.getDictionaryName() + " ("
-				+ "word VARCHAR(30) NOT NULL,"
-				+ "transcription VARCHAR(30) NOT NULL,"
-				+ "translation VARCHAR(30) NOT NULL,"
-				+ "PRIMARY KEY (word)"
-				+ ")";
-		PreparedStatement statement = connection.prepareStatement(sql);
-		statement.execute();
-	}
 }
