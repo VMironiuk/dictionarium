@@ -5,7 +5,7 @@
 <link type="text/css" rel="stylesheet" href="<c:url value="/css/style.css" />" />
 
 <ul id="main_menu">
-  <li>${user.name}</li>
+  <li><a href="${pageContext.request.contextPath}/userProfile">${user.name}</a></li>
   <li>|</li>
   <li><a href="${pageContext.request.contextPath}/signOut">Sign out</a></li>
 </ul>
