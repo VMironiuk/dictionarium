@@ -7,5 +7,5 @@
 <ul id="main_menu">
   <li>${user.name}</li>
   <li>|</li>
-  <li>Sign out</li>
+  <li><a href="${pageContext.request.contextPath}/signOut">Sign out</a></li>
 </ul>
