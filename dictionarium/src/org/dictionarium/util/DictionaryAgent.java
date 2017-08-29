@@ -94,4 +94,11 @@ public class DictionaryAgent {
 		}
 		return dictionary;
 	}
+	
+	public static void deleteDictionary(Connection connection,
+			String dictionaryName) throws SQLException {
+		String sql = "DROP TABLE " + dictionaryName;
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.execute();
+	}
 }

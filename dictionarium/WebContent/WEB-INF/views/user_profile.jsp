@@ -14,7 +14,7 @@
     <div id="container">
       <jsp:include page="_header.jsp" />
       
-      <br>
+      <p style="color: red;">${errorString}</p>
       
       <div class="fieldset">
       <p>

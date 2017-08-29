@@ -65,4 +65,12 @@ public class UserAgent {
 		}
 		return null;
 	}
+	
+	public static void deleteUser(Connection connection, User user)
+			throws SQLException {
+		String sql = "DELETE FROM user_tbl WHERE user_name = ?";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, user.getName());
+		statement.executeUpdate();
+	}
 }
